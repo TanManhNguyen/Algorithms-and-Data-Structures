@@ -47,7 +47,7 @@ Week 4
 * completeTasks
 * quickSort
 
-Week 6
+**Week 6**
 
 * bucketSort
 * setOperations (union, intersection, difference, exclusiveOr, toString)
@@ -56,27 +56,27 @@ Week 6
 * HashTable
 * MultiMap
 
-Week 7
+**Week 7**
 
 * descendingOrder (flatten BT to List)
 * isTreeBST (BinarySearchTree)
 * isTreeBalanced
 * isTreeAVL
-* isRedBlackTree (blackHeight, noRedChildren)
+* isRedBlackTree (blackHeight, noRedChildren, isTreeBST)
 * isSpecialTree (MultiwaySearchTree)
 
-Week 8
+**Week 8**
 
 * isNodeReachable
 * GraphIterator (depth-first)
 * detectCycle
 
-Week 8 Part 2
+**Week 8 Part 2**
 
 * shortestPath (using iterator)
 * numberOfConnectedComponents
 * buildMST (Kruskal's Algorithm)
 
-Dijkstra
+**Dijkstra**
 
 * shortestPath (Dijkstra's algorithm)
