@@ -1,8 +1,6 @@
 package Endterm20182019B;
 
 
-//this is only 76/100 on spectests but I cant find the mistake so feel free to message me if you can
-
 class SolutionHashTable {
     public Entry[] table;
     public int capacity;
@@ -21,8 +19,6 @@ class SolutionHashTable {
         if(capacity <= 0) throw new IllegalArgumentException();
         table = new Entry[capacity];
         this.capacity = capacity;
-        for(int i = 0; i < capacity; i++)
-            setDefunct(i);
     }
 
     /**
@@ -42,17 +38,19 @@ class SolutionHashTable {
         remove(key);
 
         int i = hash(key);
-        if(isDefunct(i)) {
+        if(table[i] == null || isDefunct(i)) {
             table[i] = new Entry(key, value);
             return true;
         }
 
-        String current = table[i].getKey();
+        int index = i;
         i = (i + 1) % capacity;
-        while(!isDefunct(i)) {
-            if(table[i].getKey().equals(current)) return false;
+
+        while(table[i] != null && !isDefunct(i)) {
+            if(i == index) return false;
             i = (i + 1) % capacity;
         }
+
         table[i] = new Entry(key, value);
         return true;
     }
@@ -70,14 +68,13 @@ class SolutionHashTable {
         if(key == null) return null;
 
         int i = hash(key);
-        if(isDefunct(i)) return null;
-        if(table[i].getKey().equals(key)) return table[i].getValue();
+        if(table[i] != null && !isDefunct(i) && table[i].getKey().equals(key)) return table[i].getValue();
 
-        String current = table[i].getKey();
+        int index = i;
         i = (i + 1) % capacity;
-        while(!isDefunct(i)) {
-            if(table[i].getKey().equals(current)) return null;
-            if(table[i].getKey().equals(key)) return table[i].getValue();
+        while(index != i && table[i] != null) {
+
+            if(table[i] != null && !isDefunct(i) &&table[i].getKey().equals(key)) return table[i].getValue();
             i = (i + 1) % capacity;
         }
 
@@ -97,17 +94,15 @@ class SolutionHashTable {
         if(key == null) return false;
 
         int i = hash(key);
-        if(isDefunct(i)) return false;
-        if(table[i].getKey().equals(key)) {
+        if(table[i] != null && !isDefunct(i) && table[i].getKey().equals(key)) {
             setDefunct(i);
             return true;
         }
 
-        String current = table[i].getKey();
+        int index = i;
         i = (i + 1) % capacity;
-        while(!isDefunct(i)) {
-            if(table[i].getKey().equals(current)) return false;
-            if(table[i].getKey().equals(key)) {
+        while(index != i && table[i] != null) {
+            if(table[i] != null && !isDefunct(i) &&table[i].getKey().equals(key)) {
                 setDefunct(i);
                 return true;
             }
@@ -128,6 +123,7 @@ class SolutionHashTable {
     }
 
     public boolean isDefunct(int index) {
+        if(table[index] == null) return false;
         return table[index].getKey() == null;
     }
 
